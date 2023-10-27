@@ -30,7 +30,7 @@ public class app_utilidad extends App{
 
     @Override
     public String toString() {
-        return super.toString() + "\ncategoria de app=" + categoria + '}';
+        return super.toString() + "\ncategoria de app=" + categoria ;
     }
     
     

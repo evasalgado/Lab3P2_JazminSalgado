@@ -17,6 +17,7 @@ public class Lab3P2_JazminSalgado {
      * @param args the command line arguments
      */
     static ArrayList usuario = new ArrayList();
+    static ArrayList apps=new ArrayList();
 
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
@@ -114,11 +115,45 @@ public class Lab3P2_JazminSalgado {
     public void agregarApp(){
         Scanner leer = new Scanner(System.in);
         System.out.println("Ingrese el nombre de la aplicacion: ");
-        String app = leer.nextLine();
-        app = leer.nextLine();
+        String name= leer.nextLine();
+        name = leer.nextLine();
         System.out.println("Ingrese el desarrollador de la aplicacion: ");
         String dev=leer.nextLine();
         System.out.println("Ingrese el precio de la aplicacion: ");
         double price = leer.nextDouble();
+        System.out.println("El juego esta disponible?[s/n]: ");
+        char resp = leer.next().charAt(0);
+        boolean estado=true;
+        switch (resp) {
+            case 's':
+                estado=true;
+                break;
+            case 'n':
+                estado=false;
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
+        } 
+        System.out.println("Es la aplicacion: \n"
+                + "a. App de utilidad\n"
+                + "b. Juego");
+        char opapp=leer.next().charAt(0);
+        switch (opapp) {
+            case 'a':
+                System.out.println("Agregue la categoria de la app:");
+                String cat=leer.nextLine();
+                apps.add(new app_utilidad(cat,name , dev, price, estado, 1, 0));
+                break;
+            case 'b':
+                System.out.println("Ingrese la edad recomendada para poder jugar: ");
+                int edad = leer.nextInt();
+                apps.add(new juego(edad, name, dev, price, estado, 1, 0));
+                break;
+            default:
+                System.out.println("Ingrese una opcion valida");
+        }
+        
+        
     }
 }

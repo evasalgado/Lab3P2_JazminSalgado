@@ -17,7 +17,7 @@ public class juego extends App{
 
     public juego(int edadrecomendada, String nombre, String Desarrollador, double precio, boolean estado, double rating, int cantdescarga) {
         super(nombre, Desarrollador, precio, estado, rating, cantdescarga);
-        this.edadrecomendada = edadrecomendada;
+        this.setEdadrecomendada(edadrecomendada);
     }
 
     public int getEdadrecomendada() {
@@ -25,7 +25,9 @@ public class juego extends App{
     }
 
     public void setEdadrecomendada(int edadrecomendada) {
-        this.edadrecomendada = edadrecomendada;
+        if (edadrecomendada>0) {
+            this.edadrecomendada = edadrecomendada;
+        }
     }
 
     @Override
