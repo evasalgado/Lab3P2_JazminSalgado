@@ -118,9 +118,12 @@ public class Lab3P2_JazminSalgado {
                     buscarCategoria();
                     break;
                 case 3:
+                    System.out.println("Aplicaciones aun disponibles");
                     bibliotecaSistema();
                     break;
                 case 4:
+                    System.out.println("Aplicaciones descargadas");
+                    MostrarDescargas();
                     break;
                 case 5:
                     break;
@@ -291,6 +294,14 @@ public class Lab3P2_JazminSalgado {
     }
     
     public static void bibliotecaSistema(){
+        for (Object app : apps) {
+            if (((App)app).getEstado()==false) {
+                System.out.println(apps.indexOf(app)+"-"+app+"\n");
+            }
+        }
+    }
+    
+    public static void MostrarDescargas(){
         for (Object app : apps) {
             if (((App)app).getEstado()==true) {
                 System.out.println(apps.indexOf(app)+"-"+app+"\n");
