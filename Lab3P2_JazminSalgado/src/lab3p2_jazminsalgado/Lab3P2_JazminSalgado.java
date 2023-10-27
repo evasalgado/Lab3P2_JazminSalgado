@@ -16,7 +16,6 @@ public class Lab3P2_JazminSalgado {
     /**
      * @param args the command line arguments
      */
-    static ArrayList usuario = new ArrayList();
     static ArrayList apps = new ArrayList();
 
     public static void main(String[] args) {
@@ -107,10 +106,16 @@ public class Lab3P2_JazminSalgado {
                     + "5. Eliminar descarga\n"
                     + "6. Calificar Aplicacion\n"
                     + "7. Volver al menu");
+            op = leer.nextInt();
             switch (op) {
                 case 1:
+                    System.out.println("Ingrese el nombre de la aplicacion a buscar: ");
+                    String b = leer.nextLine();
+                    b = leer.nextLine();
+                    buscarApp(b);
                     break;
                 case 2:
+                    buscarCategoria();
                     break;
                 case 3:
                     break;
@@ -191,25 +196,6 @@ public class Lab3P2_JazminSalgado {
                     ((App) apps.get(i)).setNombre(name);
                     ((App) apps.get(i)).setDesarrollador(dev);
                     ((App) apps.get(i)).setPrecio(price);
-                    System.out.println("Es la aplicacion: \n"
-                            + "a. App de utilidad\n"
-                            + "b. Juego");
-                    char opapp = leer.next().charAt(0);
-                    switch (opapp) {
-                        case 'a':
-                            System.out.println("Agregue la categoria de la app:");
-                            String cat = leer.nextLine();
-                            cat = leer.nextLine();
-                            ((app_utilidad) apps.get(i)).setCategoria(cat);
-                            break;
-                        case 'b':
-                            System.out.println("Ingrese la edad recomendada para poder jugar: ");
-                            int edad = leer.nextInt();
-                            ((juego) apps.get(i)).setEdadrecomendada(edad);
-                            break;
-                        default:
-                            System.out.println("Ingrese una opcion valida");
-                    }
                     System.out.println("Aplicacion actualizada exitosamente");
                 }
             }
@@ -243,34 +229,62 @@ public class Lab3P2_JazminSalgado {
             }
         }
     }
-    
-    public static void buscarApp(String app){
+
+    public static void buscarApp(String app) {
         Scanner leer = new Scanner(System.in);
         if (apps.isEmpty()) {
             System.out.println("No hay aplicaciones");
         } else {
-            for (int i = 0; i <apps.size(); i++) {
-                if (((App)apps.get(i)).getNombre().equalsIgnoreCase(app)) {
-                    for (int j = 0; j < usuario.size(); j++) {
-                        if (((App)usuario.get(j)).getEstado()==true) {
-                            System.out.println("La aplicacion ya estaba descargada en su sistema");
+            for (int i = 0; i < apps.size(); i++) {
+                if (((App) apps.get(i)).getNombre().equalsIgnoreCase(app)) {
+                    if (((App) apps.get(i)).getEstado() == true) {
+                        System.out.println("La aplicacion " + app + " se encuentra en la biblioteca\n");
+
+                    } else {
+                        System.out.println("Desea descargarla?[s/n]:  ");
+                        char resp = leer.next().charAt(0);
+                        if (resp == 's') {
+                            ((App) apps.get(i)).setEstado(true);
                         } else {
-                            System.out.println("La aplicacion "+app+" se encuentra en la biblioteca\n"
-                                    + "Desea descargarla?[s/n]:  ");
-                            char resp = leer.next().charAt(0);
-                            if (resp=='s') {
-                                ((App)apps.get(i)).setEstado(true);
-                                usuario.add((App)apps.get(i));                                
-                            } else{
-                                System.out.println("Descarga no realizada");
-                            }
+                            System.out.println("Descarga no realizada");
+
                         }
                     }
+
                 } else {
                     System.out.println("La aplicacion no se encuentra en el sistema");
                 }
             }
         }
+    }
+
+    public static void buscarCategoria() {
+        Scanner leer = new Scanner(System.in);
+
+        System.out.println("Ingrese la categoria a la que pertenece: ");
+        String appu = leer.nextLine();
+        for (Object app : apps) {
+            if (((app_utilidad) app).getCategoria().equalsIgnoreCase(appu)) {
+                System.out.println(apps.indexOf(app) + "-" + app + "\n");
+                System.out.println("Desea descargar una aplicacion?[s/n]: ");
+                char resp = leer.next().charAt(0);
+                if (resp == 's') {
+                    System.out.println("Ingrese el indice de la aplicacion que desea descargar: ");
+                    int i = leer.nextInt();
+                    if (i >= 0 && i < apps.size()) {
+                        if (((app_utilidad) app).getEstado() == true) {
+                            System.out.println("Aplicacion ya descargada");
+                        } else {
+                            ((app_utilidad) app).setEstado(true);
+                        }
+                    }
+                } else {
+                    System.out.println("Descarga de aplicacion no hecha");
+                }
+
+            }
+        }
+
     }
 
 }
