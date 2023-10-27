@@ -23,7 +23,7 @@ public class App {
         this.nombre = nombre;
         this.Desarrollador = Desarrollador;
         this.precio = precio;
-        this.setEstado(estado);
+        this.estado=estado;
         this.rating = rating;
         this.cantdescarga = cantdescarga;
     }

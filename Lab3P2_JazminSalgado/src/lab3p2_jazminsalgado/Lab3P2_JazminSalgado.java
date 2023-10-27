@@ -31,8 +31,10 @@ public class Lab3P2_JazminSalgado {
             op = leer.nextInt();
             switch (op) {
                 case 1:
+                    menuAdministrador();
                     break;
                 case 2:
+                    menuUsuario();
                     break;
                 case 3:
                     System.out.println("Gracias por utilizar mi programa");
@@ -58,8 +60,10 @@ public class Lab3P2_JazminSalgado {
             op = leer.nextInt();
             switch (op) {
                 case 1:
+                    agregarApp();
                     break;
                 case 2:
+                    BibliotecaApps();
                     break;
                 case 3:
                     break;
@@ -112,11 +116,10 @@ public class Lab3P2_JazminSalgado {
             }
         } while (op!=7);
     }
-    public void agregarApp(){
+    public static void agregarApp(){
         Scanner leer = new Scanner(System.in);
         System.out.println("Ingrese el nombre de la aplicacion: ");
         String name= leer.nextLine();
-        name = leer.nextLine();
         System.out.println("Ingrese el desarrollador de la aplicacion: ");
         String dev=leer.nextLine();
         System.out.println("Ingrese el precio de la aplicacion: ");
@@ -143,6 +146,7 @@ public class Lab3P2_JazminSalgado {
             case 'a':
                 System.out.println("Agregue la categoria de la app:");
                 String cat=leer.nextLine();
+                cat=leer.nextLine();
                 apps.add(new app_utilidad(cat,name , dev, price, estado, 1, 0));
                 break;
             case 'b':
@@ -153,7 +157,20 @@ public class Lab3P2_JazminSalgado {
             default:
                 System.out.println("Ingrese una opcion valida");
         }
-        
+        System.out.println("Aplicacion agregada a la tienda exitosamente");
         
     }
+    public static void BibliotecaApps(){
+        if (apps.isEmpty()) {
+            System.out.println("Aun no hay aplicaciones");
+        } else{
+            System.out.println("Biblioteca de aplicaciones");
+            for (Object app : apps) {
+            if (app instanceof App) {
+                System.out.println(apps.indexOf(app)+"-"+app+"\n");
+            }
+        }
+        }
+    }
+    
 }
