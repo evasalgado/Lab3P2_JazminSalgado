@@ -66,6 +66,10 @@ public class Lab3P2_JazminSalgado {
                     BibliotecaApps();
                     break;
                 case 3:
+                    BibliotecaApps();
+                    System.out.println("Ingrese el indice de la aplicacion a actualizar: ");
+                    int a = leer.nextInt();
+                    actualizacion(a);
                     break;
                 case 4:
                     break;
@@ -170,6 +174,61 @@ public class Lab3P2_JazminSalgado {
                 System.out.println(apps.indexOf(app)+"-"+app+"\n");
             }
         }
+        }
+    }
+    public static void actualizacion(int i){
+        if (apps.isEmpty()) {
+            System.out.println("Aun no hay aplicaciones");
+        } else {
+            if (i>=0&&i<apps.size()) {
+                if (apps.get(i) instanceof App) {
+                    Scanner leer = new Scanner(System.in);
+        System.out.println("Ingrese el nombre de la aplicacion: ");
+        String name= leer.nextLine();
+        System.out.println("Ingrese el desarrollador de la aplicacion: ");
+        String dev=leer.nextLine();
+        System.out.println("Ingrese el precio de la aplicacion: ");
+        double price = leer.nextDouble();
+        System.out.println("El juego esta disponible?[s/n]: ");
+        char resp = leer.next().charAt(0);
+        boolean estado=true;
+        switch (resp) {
+            case 's':
+                estado=true;
+                break;
+            case 'n':
+                estado=false;
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
+        } 
+        ((App)apps.get(i)).setNombre(name);
+        ((App)apps.get(i)).setDesarrollador(dev);
+        ((App)apps.get(i)).setPrecio(price);
+        ((App)apps.get(i)).setEstado(estado);
+        System.out.println("Es la aplicacion: \n"
+                + "a. App de utilidad\n"
+                + "b. Juego");
+        char opapp=leer.next().charAt(0);
+        switch (opapp) {
+            case 'a':
+                System.out.println("Agregue la categoria de la app:");
+                String cat=leer.nextLine();
+                cat=leer.nextLine();
+                ((app_utilidad)apps.get(i)).setCategoria(cat);
+                break;
+            case 'b':
+                System.out.println("Ingrese la edad recomendada para poder jugar: ");
+                int edad = leer.nextInt();
+                ((juego)apps.get(i)).setEdadrecomendada(edad);
+                break;
+            default:
+                System.out.println("Ingrese una opcion valida");
+        }
+        System.out.println("Aplicacion actualizada exitosamente");
+                }
+            }
         }
     }
     
