@@ -128,7 +128,10 @@ public class Lab3P2_JazminSalgado {
                 case 5:
                     break;
                 case 6:
-
+                    MostrarDescargas();
+                    System.out.println("Ingrese el indice de la aplicacion a eliminar del sistema: ");
+                    int i = leer.nextInt();
+                    EliminarDescargas(i);
                     break;
                 case 7:
                     System.out.println("Regresando al menu principal...");
@@ -249,7 +252,7 @@ public class Lab3P2_JazminSalgado {
                         char resp = leer.next().charAt(0);
                         if (resp == 's') {
                             ((App) apps.get(i)).setEstado(true);
-                            ((App) apps.get(i)).setCantdescarga( ((App) apps.get(i)).getCantdescarga()+1);
+                            ((App) apps.get(i)).setCantdescarga(((App) apps.get(i)).getCantdescarga() + 1);
                         } else {
                             System.out.println("Descarga no realizada");
 
@@ -281,7 +284,7 @@ public class Lab3P2_JazminSalgado {
                             System.out.println("Aplicacion ya descargada");
                         } else {
                             ((app_utilidad) app).setEstado(true);
-                             ((App) apps.get(i)).setCantdescarga( ((App) apps.get(i)).getCantdescarga()+1);
+                            ((App) apps.get(i)).setCantdescarga(((App) apps.get(i)).getCantdescarga() + 1);
                         }
                     }
                 } else {
@@ -292,19 +295,45 @@ public class Lab3P2_JazminSalgado {
         }
 
     }
-    
-    public static void bibliotecaSistema(){
-        for (Object app : apps) {
-            if (((App)app).getEstado()==false) {
-                System.out.println(apps.indexOf(app)+"-"+app+"\n");
+
+    public static void bibliotecaSistema() {
+        if (apps.isEmpty()) {
+            System.out.println("No hay aplicaciones");
+        } else {
+            for (Object app : apps) {
+                if (((App) app).getEstado() == false) {
+                    System.out.println(apps.indexOf(app) + "-" + app + "\n");
+                }
             }
         }
     }
-    
-    public static void MostrarDescargas(){
-        for (Object app : apps) {
-            if (((App)app).getEstado()==true) {
-                System.out.println(apps.indexOf(app)+"-"+app+"\n");
+
+    public static void MostrarDescargas() {
+        if (apps.isEmpty()) {
+            System.out.println("No hay aplicaciones");
+        } else {
+            for (Object app : apps) {
+                if (((App) app).getEstado() == true) {
+                    System.out.println(apps.indexOf(app) + "-" + app + "\n");
+                }
+            }
+        }
+    }
+
+    public static void EliminarDescargas(int i) {
+        Scanner leer = new Scanner(System.in);
+        if (i >= 0 && i <= apps.size()) {
+            if (((App) apps.get(i)).getEstado() == true) {
+                System.out.println("Seguro desea eliminar?[s/n]: ");
+                char resp = leer.next().charAt(0);
+                switch (resp) {
+                    case 's':
+                        ((App) apps.get(i)).setEstado(false);
+                        System.out.println("Aplicacion eliminada exitosamente");
+                        break;
+                    default:
+                        System.out.println("Aplicacion no eliminada");
+                }
             }
         }
     }
