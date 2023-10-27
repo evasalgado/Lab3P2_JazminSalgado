@@ -13,13 +13,13 @@ public class App {
     protected String Desarrollador;
     protected double precio;
     protected boolean estado;
-    protected String rating;
+    protected double rating;
     protected int cantdescarga;
 
     public App() {
     }
 
-    public App(String nombre, String Desarrollador, double precio, boolean estado, String rating, int cantdescarga) {
+    public App(String nombre, String Desarrollador, double precio, boolean estado, double rating, int cantdescarga) {
         this.nombre = nombre;
         this.Desarrollador = Desarrollador;
         this.precio = precio;
@@ -58,19 +58,23 @@ public class App {
 
     public void setEstado(boolean estado) {
         if (estado==true) {
-            System.out.println("Disponible ");
+            System.out.println("Descargada ");
         } else {
-            System.out.println("No disponible");
+            System.out.println("No descargada");
         }
         this.estado = estado;
     }
 
-    public String getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setRating(double rating) {
+        if (rating>0&&rating<=5) {
+            this.rating = rating;
+        } else {
+            System.out.println("Ingrese un raiting adecuado");
+        }
     }
 
     public int getCantdescarga() {

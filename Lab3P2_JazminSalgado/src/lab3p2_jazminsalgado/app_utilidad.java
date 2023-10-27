@@ -15,7 +15,7 @@ public class app_utilidad extends App{
         super();
     }
 
-    public app_utilidad(String categoria, String nombre, String Desarrollador, double precio, boolean estado, String rating, int cantdescarga) {
+    public app_utilidad(String categoria, String nombre, String Desarrollador, double precio, boolean estado, double rating, int cantdescarga) {
         super(nombre, Desarrollador, precio, estado, rating, cantdescarga);
         this.categoria = categoria;
     }

@@ -15,7 +15,7 @@ public class juego extends App{
         super();
     }
 
-    public juego(int edadrecomendada, String nombre, String Desarrollador, double precio, boolean estado, String rating, int cantdescarga) {
+    public juego(int edadrecomendada, String nombre, String Desarrollador, double precio, boolean estado, double rating, int cantdescarga) {
         super(nombre, Desarrollador, precio, estado, rating, cantdescarga);
         this.edadrecomendada = edadrecomendada;
     }
