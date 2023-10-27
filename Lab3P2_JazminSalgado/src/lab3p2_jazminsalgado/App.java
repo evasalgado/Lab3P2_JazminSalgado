@@ -58,9 +58,9 @@ public class App {
 
     public void setEstado(boolean estado) {
         if (estado==true) {
-            System.out.println("Aplicacion Descargada ");
+            System.out.println("Aplicacion Descargada\n ");
         } else {
-            System.out.println("No descargada");
+            System.out.println("Aplciacion No descargada\n");
         }
         this.estado = estado;
     }

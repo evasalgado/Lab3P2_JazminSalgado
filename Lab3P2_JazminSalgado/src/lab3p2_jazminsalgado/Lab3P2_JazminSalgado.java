@@ -126,12 +126,17 @@ public class Lab3P2_JazminSalgado {
                     MostrarDescargas();
                     break;
                 case 5:
+                    MostrarDescargas();
+                    System.out.println("Ingrese el indice de la aplicacion a eliminar del sistema: ");
+                    int ed = leer.nextInt();
+                    EliminarDescargas(ed);
+
                     break;
                 case 6:
                     MostrarDescargas();
-                    System.out.println("Ingrese el indice de la aplicacion a eliminar del sistema: ");
-                    int i = leer.nextInt();
-                    EliminarDescargas(i);
+                    System.out.println("Ingrese el indice de la aplicacion a calificar");
+                    int c = leer.nextInt();
+                    CalificarAplicacion(c);
                     break;
                 case 7:
                     System.out.println("Regresando al menu principal...");
@@ -242,25 +247,26 @@ public class Lab3P2_JazminSalgado {
         if (apps.isEmpty()) {
             System.out.println("No hay aplicaciones");
         } else {
-            for (int i = 0; i < apps.size(); i++) {
-                if (((App) apps.get(i)).getNombre().equalsIgnoreCase(app)) {
-                    if (((App) apps.get(i)).getEstado() == true) {
+            for (Object appss : apps) {
+                if (!((App) appss).getNombre().equalsIgnoreCase(app)) {
+                    System.out.println("Aplicacion no encontrada\n");
+                } else {
+                    if (((App) appss).getEstado() == true) {
                         System.out.println("La aplicacion " + app + " se encuentra en la biblioteca\n");
 
                     } else {
+                        System.out.println("La aplicacion " + app + " esta disponible para su descarga");
                         System.out.println("Desea descargarla?[s/n]:  ");
                         char resp = leer.next().charAt(0);
                         if (resp == 's') {
-                            ((App) apps.get(i)).setEstado(true);
-                            ((App) apps.get(i)).setCantdescarga(((App) apps.get(i)).getCantdescarga() + 1);
+                            ((App) appss).setEstado(true);
+                            ((App) appss).setCantdescarga(((App) appss).getCantdescarga() + 1);
+                            
                         } else {
-                            System.out.println("Descarga no realizada");
+                            System.out.println("Descarga no realizada\n");
 
                         }
                     }
-
-                } else {
-                    System.out.println("La aplicacion no se encuentra en el sistema");
                 }
             }
         }
@@ -274,31 +280,31 @@ public class Lab3P2_JazminSalgado {
         for (Object app : apps) {
             if (((app_utilidad) app).getCategoria().equalsIgnoreCase(appu)) {
                 System.out.println(apps.indexOf(app) + "-" + app + "\n");
-                System.out.println("Desea descargar una aplicacion?[s/n]: ");
-                char resp = leer.next().charAt(0);
-                if (resp == 's') {
-                    System.out.println("Ingrese el indice de la aplicacion que desea descargar: ");
-                    int i = leer.nextInt();
-                    if (i >= 0 && i < apps.size()) {
-                        if (((app_utilidad) app).getEstado() == true) {
-                            System.out.println("Aplicacion ya descargada");
-                        } else {
-                            ((app_utilidad) app).setEstado(true);
-                            ((App) apps.get(i)).setCantdescarga(((App) apps.get(i)).getCantdescarga() + 1);
-                        }
-                    }
-                } else {
-                    System.out.println("Descarga de aplicacion no hecha");
-                }
-
             }
+
+        }
+        System.out.println("Desea descargar una aplicacion?[s/n]: ");
+        char resp = leer.next().charAt(0);
+        if (resp == 's') {
+            System.out.println("Ingrese el indice de la aplicacion que desea descargar: ");
+            int i = leer.nextInt();
+            if (i >= 0 && i < apps.size()) {
+                if (((app_utilidad) apps.get(i)).getEstado() == true) {
+                    System.out.println("Aplicacion ya descargada\n");
+                } else {
+                    ((app_utilidad) apps.get(i)).setEstado(true);
+                    ((App) apps.get(i)).setCantdescarga(((App) apps.get(i)).getCantdescarga() + 1);
+                }
+            }
+        } else {
+            System.out.println("Descarga de aplicacion no hecha\n");
         }
 
     }
 
     public static void bibliotecaSistema() {
         if (apps.isEmpty()) {
-            System.out.println("No hay aplicaciones");
+            System.out.println("No hay aplicaciones\n");
         } else {
             for (Object app : apps) {
                 if (((App) app).getEstado() == false) {
@@ -310,7 +316,7 @@ public class Lab3P2_JazminSalgado {
 
     public static void MostrarDescargas() {
         if (apps.isEmpty()) {
-            System.out.println("No hay aplicaciones");
+            System.out.println("No hay aplicaciones\n");
         } else {
             for (Object app : apps) {
                 if (((App) app).getEstado() == true) {
@@ -322,17 +328,37 @@ public class Lab3P2_JazminSalgado {
 
     public static void EliminarDescargas(int i) {
         Scanner leer = new Scanner(System.in);
-        if (i >= 0 && i <= apps.size()) {
+        if (apps.isEmpty()) {
+            System.out.println("No hay aplicaciones\n");
+        }else{
+            if (i >= 0 && i <= apps.size()) {
             if (((App) apps.get(i)).getEstado() == true) {
                 System.out.println("Seguro desea eliminar?[s/n]: ");
                 char resp = leer.next().charAt(0);
                 switch (resp) {
                     case 's':
                         ((App) apps.get(i)).setEstado(false);
-                        System.out.println("Aplicacion eliminada exitosamente");
+                        System.out.println("Aplicacion eliminada exitosamente\n");
                         break;
                     default:
-                        System.out.println("Aplicacion no eliminada");
+                        System.out.println("Aplicacion no eliminada\n");
+                }
+            }
+        }
+        }
+    }
+
+    public static void CalificarAplicacion(int i) {
+        Scanner leer = new Scanner(System.in);
+        if (apps.isEmpty()) {
+            System.out.println("No hay aplicaciones\n");
+        } else {
+            if (i >= 0 && i < apps.size()) {
+                if (((App) apps.get(i)).getEstado() == true) {
+                    System.out.println("Ingrese su calificacion para la aplicacion: ");
+                    double r = leer.nextDouble();
+                    ((App) apps.get(i)).setRating(r);
+                    System.out.println("Su calificacion a sido agregada\n");
                 }
             }
         }
