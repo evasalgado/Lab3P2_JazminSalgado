@@ -17,7 +17,7 @@ public class Lab3P2_JazminSalgado {
      * @param args the command line arguments
      */
     static ArrayList usuario = new ArrayList();
-    static ArrayList apps=new ArrayList();
+    static ArrayList apps = new ArrayList();
 
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
@@ -72,8 +72,17 @@ public class Lab3P2_JazminSalgado {
                     actualizacion(a);
                     break;
                 case 4:
+                    BibliotecaApps();
+                    System.out.println("Ingrese el indice de la aplicacion a eliminar: ");
+                    int eB = leer.nextInt();
+                    eliminarAppB(eB);
                     break;
                 case 5:
+                    BibliotecaApps();
+                    System.out.println("Ingrese el nombre del desarrollador: ");
+                    String dev = leer.nextLine();
+                    dev = leer.nextLine();
+                    estadisticadeDev(dev);
                     break;
                 case 6:
                     System.out.println("Regresando al menu principal...");
@@ -85,7 +94,8 @@ public class Lab3P2_JazminSalgado {
         } while (op != 6);
 
     }
-    public static void menuUsuario(){
+
+    public static void menuUsuario() {
         Scanner leer = new Scanner(System.in);
         int op = 0;
         do {
@@ -109,127 +119,129 @@ public class Lab3P2_JazminSalgado {
                 case 5:
                     break;
                 case 6:
-                    
+
                     break;
-                case 7: 
+                case 7:
                     System.out.println("Regresando al menu principal...");
                     break;
                 default:
                     System.out.println("Numero ingresado no es valido");
                     break;
             }
-        } while (op!=7);
+        } while (op != 7);
     }
-    public static void agregarApp(){
+
+    public static void agregarApp() {
         Scanner leer = new Scanner(System.in);
         System.out.println("Ingrese el nombre de la aplicacion: ");
-        String name= leer.nextLine();
+        String name = leer.nextLine();
         System.out.println("Ingrese el desarrollador de la aplicacion: ");
-        String dev=leer.nextLine();
+        String dev = leer.nextLine();
         System.out.println("Ingrese el precio de la aplicacion: ");
         double price = leer.nextDouble();
-        System.out.println("El juego esta disponible?[s/n]: ");
-        char resp = leer.next().charAt(0);
-        boolean estado=true;
-        switch (resp) {
-            case 's':
-                estado=true;
-                break;
-            case 'n':
-                estado=false;
-                break;
-            default:
-                System.out.println("Opcion no valida");
-                break;
-        } 
         System.out.println("Es la aplicacion: \n"
                 + "a. App de utilidad\n"
                 + "b. Juego");
-        char opapp=leer.next().charAt(0);
+        char opapp = leer.next().charAt(0);
         switch (opapp) {
             case 'a':
                 System.out.println("Agregue la categoria de la app:");
-                String cat=leer.nextLine();
-                cat=leer.nextLine();
-                apps.add(new app_utilidad(cat,name , dev, price, estado, 1, 0));
+                String cat = leer.nextLine();
+                cat = leer.nextLine();
+                apps.add(new app_utilidad(cat, name, dev, price, false, 1, 0));
                 break;
             case 'b':
                 System.out.println("Ingrese la edad recomendada para poder jugar: ");
                 int edad = leer.nextInt();
-                apps.add(new juego(edad, name, dev, price, estado, 1, 0));
+                apps.add(new juego(edad, name, dev, price, false, 1, 0));
                 break;
             default:
                 System.out.println("Ingrese una opcion valida");
         }
-        System.out.println("Aplicacion agregada a la tienda exitosamente");
-        
+        System.out.println("Aplicacion agregada a la biblioteca exitosamente");
+
     }
-    public static void BibliotecaApps(){
-        if (apps.isEmpty()) {
-            System.out.println("Aun no hay aplicaciones");
-        } else{
-            System.out.println("Biblioteca de aplicaciones");
-            for (Object app : apps) {
-            if (app instanceof App) {
-                System.out.println(apps.indexOf(app)+"-"+app+"\n");
-            }
-        }
-        }
-    }
-    public static void actualizacion(int i){
+
+    public static void BibliotecaApps() {
         if (apps.isEmpty()) {
             System.out.println("Aun no hay aplicaciones");
         } else {
-            if (i>=0&&i<apps.size()) {
-                if (apps.get(i) instanceof App) {
-                    Scanner leer = new Scanner(System.in);
-        System.out.println("Ingrese el nombre de la aplicacion: ");
-        String name= leer.nextLine();
-        System.out.println("Ingrese el desarrollador de la aplicacion: ");
-        String dev=leer.nextLine();
-        System.out.println("Ingrese el precio de la aplicacion: ");
-        double price = leer.nextDouble();
-        System.out.println("El juego esta disponible?[s/n]: ");
-        char resp = leer.next().charAt(0);
-        boolean estado=true;
-        switch (resp) {
-            case 's':
-                estado=true;
-                break;
-            case 'n':
-                estado=false;
-                break;
-            default:
-                System.out.println("Opcion no valida");
-                break;
-        } 
-        ((App)apps.get(i)).setNombre(name);
-        ((App)apps.get(i)).setDesarrollador(dev);
-        ((App)apps.get(i)).setPrecio(price);
-        ((App)apps.get(i)).setEstado(estado);
-        System.out.println("Es la aplicacion: \n"
-                + "a. App de utilidad\n"
-                + "b. Juego");
-        char opapp=leer.next().charAt(0);
-        switch (opapp) {
-            case 'a':
-                System.out.println("Agregue la categoria de la app:");
-                String cat=leer.nextLine();
-                cat=leer.nextLine();
-                ((app_utilidad)apps.get(i)).setCategoria(cat);
-                break;
-            case 'b':
-                System.out.println("Ingrese la edad recomendada para poder jugar: ");
-                int edad = leer.nextInt();
-                ((juego)apps.get(i)).setEdadrecomendada(edad);
-                break;
-            default:
-                System.out.println("Ingrese una opcion valida");
-        }
-        System.out.println("Aplicacion actualizada exitosamente");
+            System.out.println("Biblioteca de aplicaciones");
+            for (Object app : apps) {
+                if (app instanceof App) {
+                    System.out.println(apps.indexOf(app) + "-" + app + "\n");
                 }
             }
         }
     }
-    
+
+    public static void actualizacion(int i) {
+        if (apps.isEmpty()) {
+            System.out.println("Aun no hay aplicaciones");
+        } else {
+            if (i >= 0 && i < apps.size()) {
+                if (apps.get(i) instanceof App) {
+                    Scanner leer = new Scanner(System.in);
+                    System.out.println("Ingrese el nombre de la aplicacion: ");
+                    String name = leer.nextLine();
+                    System.out.println("Ingrese el desarrollador de la aplicacion: ");
+                    String dev = leer.nextLine();
+                    System.out.println("Ingrese el precio de la aplicacion: ");
+                    double price = leer.nextDouble();
+                    ((App) apps.get(i)).setNombre(name);
+                    ((App) apps.get(i)).setDesarrollador(dev);
+                    ((App) apps.get(i)).setPrecio(price);
+                    System.out.println("Es la aplicacion: \n"
+                            + "a. App de utilidad\n"
+                            + "b. Juego");
+                    char opapp = leer.next().charAt(0);
+                    switch (opapp) {
+                        case 'a':
+                            System.out.println("Agregue la categoria de la app:");
+                            String cat = leer.nextLine();
+                            cat = leer.nextLine();
+                            ((app_utilidad) apps.get(i)).setCategoria(cat);
+                            break;
+                        case 'b':
+                            System.out.println("Ingrese la edad recomendada para poder jugar: ");
+                            int edad = leer.nextInt();
+                            ((juego) apps.get(i)).setEdadrecomendada(edad);
+                            break;
+                        default:
+                            System.out.println("Ingrese una opcion valida");
+                    }
+                    System.out.println("Aplicacion actualizada exitosamente");
+                }
+            }
+        }
+    }
+
+    public static void eliminarAppB(int i) {
+        if (apps.isEmpty()) {
+            System.out.println("No hay aplicaciones en la biblioteca");
+        } else {
+            if (i >= 0 && i < apps.size()) {
+                if (apps.get(i) instanceof App) {
+                    System.out.println("Aplicacion " + ((App) apps.get(i)).getNombre() + " removida de la biblioteca");
+                }
+            }
+        }
+    }
+
+    public static void estadisticadeDev(String dev) {
+        if (apps.isEmpty()) {
+            System.out.println("No hay aplicaciones aun");
+        } else {
+            for (int i = 0; i < apps.size(); i++) {
+                if (((App) apps.get(i)).getDesarrollador().equalsIgnoreCase(dev)) {
+                    System.out.println("Nombre de aplicacion: " + ((App) apps.get(i)).getNombre() + "\n"
+                            + "Numero de descargas: " + ((App) apps.get(i)).getCantdescarga() + "\n"
+                            + "Numero de Raitings: " + ((App) apps.get(i)).getRating());
+                } else {
+                    System.out.println("Desarrollador no esta en la lista");
+                }
+            }
+        }
+    }
+
 }
