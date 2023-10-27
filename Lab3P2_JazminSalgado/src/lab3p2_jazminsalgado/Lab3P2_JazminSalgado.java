@@ -243,5 +243,34 @@ public class Lab3P2_JazminSalgado {
             }
         }
     }
+    
+    public static void buscarApp(String app){
+        Scanner leer = new Scanner(System.in);
+        if (apps.isEmpty()) {
+            System.out.println("No hay aplicaciones");
+        } else {
+            for (int i = 0; i <apps.size(); i++) {
+                if (((App)apps.get(i)).getNombre().equalsIgnoreCase(app)) {
+                    for (int j = 0; j < usuario.size(); j++) {
+                        if (((App)usuario.get(j)).getEstado()==true) {
+                            System.out.println("La aplicacion ya estaba descargada en su sistema");
+                        } else {
+                            System.out.println("La aplicacion "+app+" se encuentra en la biblioteca\n"
+                                    + "Desea descargarla?[s/n]:  ");
+                            char resp = leer.next().charAt(0);
+                            if (resp=='s') {
+                                ((App)apps.get(i)).setEstado(true);
+                                usuario.add((App)apps.get(i));                                
+                            } else{
+                                System.out.println("Descarga no realizada");
+                            }
+                        }
+                    }
+                } else {
+                    System.out.println("La aplicacion no se encuentra en el sistema");
+                }
+            }
+        }
+    }
 
 }
