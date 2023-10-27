@@ -118,6 +118,7 @@ public class Lab3P2_JazminSalgado {
                     buscarCategoria();
                     break;
                 case 3:
+                    bibliotecaSistema();
                     break;
                 case 4:
                     break;
@@ -245,6 +246,7 @@ public class Lab3P2_JazminSalgado {
                         char resp = leer.next().charAt(0);
                         if (resp == 's') {
                             ((App) apps.get(i)).setEstado(true);
+                            ((App) apps.get(i)).setCantdescarga( ((App) apps.get(i)).getCantdescarga()+1);
                         } else {
                             System.out.println("Descarga no realizada");
 
@@ -276,6 +278,7 @@ public class Lab3P2_JazminSalgado {
                             System.out.println("Aplicacion ya descargada");
                         } else {
                             ((app_utilidad) app).setEstado(true);
+                             ((App) apps.get(i)).setCantdescarga( ((App) apps.get(i)).getCantdescarga()+1);
                         }
                     }
                 } else {
@@ -285,6 +288,14 @@ public class Lab3P2_JazminSalgado {
             }
         }
 
+    }
+    
+    public static void bibliotecaSistema(){
+        for (Object app : apps) {
+            if (((App)app).getEstado()==true) {
+                System.out.println(apps.indexOf(app)+"-"+app+"\n");
+            }
+        }
     }
 
 }
