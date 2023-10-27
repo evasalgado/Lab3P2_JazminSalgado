@@ -21,12 +21,23 @@ public class Lab3P2_JazminSalgado {
         int op=0;
         do {
             System.out.println("----MENU----\n"
-                    + "1. "
-                    + "2."
-                    + "3."
-                    + "4."
-                    + "5. ");
-        } while (op!=5);
+                    + "1.Menu de Administrador\n"
+                    + "2.Menu de usuario\n"
+                    + "3.Salir\n");
+            op=leer.nextInt();
+            switch (op) {
+                case 1:
+                    break;
+                case 2: 
+                    break;
+                case 3: 
+                    System.out.println("Gracias por utilizar mi programa");
+                    break;
+                default:
+                    System.out.println("Numero ingresado no es valido");
+                    break;
+            }
+        } while (op!=3);
     }
     
 }
